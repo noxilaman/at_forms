@@ -32,7 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admin/users', App\Http\Controllers\UsersController::class);
     Route::resource('/admin/question_sets', App\Http\Controllers\QuestionSetsController::class);
     Route::resource('/admin/question_groups', App\Http\Controllers\QuestionGroupsController::class);
-
+    Route::get('/admin/question_groups/add_question/{id}', [App\Http\Controllers\QuestionGroupsController::class, 'addQuestion'])->name('question_groups.addquestion');
+    Route::post('/admin/question_groups/add_question/{id}', [App\Http\Controllers\QuestionGroupsController::class, 'storeQuestion'])->name('question_groups.storequestion');
+    Route::get('/admin/question_groups/moveup_question/{id}', [App\Http\Controllers\QuestionGroupsController::class, 'moveupQuestion'])->name('question_groups.moveup_question');
+    Route::get('/admin/question_groups/movedown_question/{id}', [App\Http\Controllers\QuestionGroupsController::class, 'movedownQuestion'])->name('question_groups.movedown_question');
+    Route::get('/admin/question_groups/remove_question/{id}', [App\Http\Controllers\QuestionGroupsController::class, 'removeQuestion'])->name('question_groups.remove_question');
+    Route::resource('/admin/questions', App\Http\Controllers\QuestionsController::class);
 
 });
 

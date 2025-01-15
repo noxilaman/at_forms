@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\QuestionGroup;
+use App\Models\QuestionGroupDetail;
+use App\Models\Question;
 
 class QuestionGroupsController extends Controller
 {
@@ -87,4 +89,47 @@ class QuestionGroupsController extends Controller
     {
         //
     }
+
+    public function addQuestion($id)
+    {
+        $questionGroup = QuestionGroup::find($id);
+        $questionList = Question::where('status', 'active')->pluck('question', 'id');
+        return view('question_groups.add_question', compact('questionGroup', 'questionList'));
+    }
+
+    public function storeQuestion(Request $request, $id)
+    {
+        $tmp = $request->all();
+        $tmp['question_group_id'] = $id;
+        $lastSequence = QuestionGroupDetail::where('question_group_id', $id)->max('sequence') ?? 0;
+        $tmp['sequence'] = $lastSequence + 1;
+        $tmp['status'] = 'active';
+
+        $questionGroup = QuestionGroup::find($id);
+        $questionGroup->questionGroupDetails()->create($tmp);
+        return redirect()->route('question_groups.show', $id)->with('success', 'Question added successfully.');
+    }
+
+    public function moveupQuestion($id)
+    {
+        $questionSetDetail = QuestionGroupDetail::find($id);
+        $questionSetDetail->moveOrderUp();
+        return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question moved up successfully.');
+    }
+
+    public function movedownQuestion($id)
+    {
+        $questionSetDetail = QuestionGroupDetail::find($id);
+        $questionSetDetail->moveOrderDown();
+        return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question moved down successfully.');
+    }
+
+    public function removeQuestion($id)
+    {
+        $questionSetDetail = QuestionGroupDetail::find($id);
+        $questionSetDetail->delete();
+        return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question removed successfully.');
+    }
+
+
 }

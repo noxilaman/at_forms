@@ -54,6 +54,7 @@
                         <h6 class="collapse-header">Admin Management:</h6>
                         <a class="collapse-item" href="{{ route('question_sets.index') }}">Question Set</a>
                         <a class="collapse-item" href="{{ route('question_groups.index') }}">Question Group</a>
+                        <a class="collapse-item" href="{{ route('questions.index') }}">Questions</a>
                         <a class="collapse-item" href="{{ route('crops.index') }}">Crop</a>
                         <a class="collapse-item" href="{{ route('harvesters.index') }}">Harvesters</a>
                         <a class="collapse-item" href="{{ route('drivers.index') }}">Drivers</a>

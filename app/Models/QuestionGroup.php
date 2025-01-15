@@ -15,8 +15,8 @@ class QuestionGroup extends Model
         'status',
     ];
 
-    public function questionSetDetails()
+    public function questionGroupDetails()
     {
-        return $this->hasMany(QuestionSetDetail::class);
+        return $this->hasMany(QuestionGroupDetail::class);
     }
 }

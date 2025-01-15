@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class QuestionsController extends Controller
 {
@@ -13,7 +14,8 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        //
+        $questions = Question::paginate(10);
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -23,7 +25,7 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('questions.create');
     }
 
     /**
@@ -34,7 +36,8 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Question::create($request->all());
+        return redirect()->route('questions.index')->with('success', 'Question created successfully.');
     }
 
     /**
@@ -45,7 +48,8 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = Question::find($id);
+        return view('questions.show', compact('question'));
     }
 
     /**
@@ -56,7 +60,8 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::find($id);
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -68,7 +73,8 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Question::find($id)->update($request->all());
+        return redirect()->route('questions.index')->with('success', 'Question updated successfully.');
     }
 
     /**
