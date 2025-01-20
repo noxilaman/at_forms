@@ -36,7 +36,7 @@
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-12 col-md-12 mb-12">
+        <div class="col-xl-12 col-md-12 mb-12 pt-2">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <form action="{{ route('harvest_logs.updateissue',$harvestIssue->id) }}" method="POST" enctype="multipart/form-data">
@@ -100,7 +100,7 @@
 
                         </div>
 
-                        <a href="{{ route('harvest_logs.index') }}" class="btn btn-secondary">{{ __('Back') }}</a> <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{__('Update')}}</button> <a href="{{ route('harvest_logs.issues',[$harvestIssue->harvestLog->id]) }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

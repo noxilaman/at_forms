@@ -26,4 +26,14 @@ class QuestionSetDetail extends Model
         return $this->belongsTo(QuestionGroup::class);
     }
 
+    public function regenratesequences($question_set_id)
+    {
+        $questionSetDetails = QuestionSetDetail::where('question_set_id', $question_set_id)->orderBy('sequence')->get();
+        $sequence = 1;
+        foreach ($questionSetDetails as $questionSetDetail) {
+            $questionSetDetail->sequence = $sequence;
+            $questionSetDetail->save();
+            $sequence++;
+        }
+    }
 }

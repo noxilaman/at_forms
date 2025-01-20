@@ -15,10 +15,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Harvester / Driver</th>
-                                <th scope="col">Farmer / Land Size</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">{{__('Date')}}</th>
+                                <th scope="col">{{__('Harvester')}} / {{__('Driver')}}</th>
+                                <th scope="col">{{__('Farmer')}} / {{__('Land Size')}}</th>
+                                <th scope="col">{{__('Status')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                     <td>{{ $harvestIssue->harvestLog->harvest_date }}</td>
                                     <td>{{ $harvestIssue->harvestLog->harvester->name }} / {{ $harvestIssue->harvestLog->driver->name }}</td>
                                     <td>{{ $harvestIssue->harvestLog->farmer_name }} / {{ $harvestIssue->harvestLog->area_size }}</td>
-                                    <td>{{ $harvestIssue->harvestLog->progress_status }} / {{ $harvestIssue->harvestLog->status }}</td>
+                                    <td>{{ __($harvestIssue->harvestLog->progress_status) }} / {{ __($harvestIssue->harvestLog->status) }}</td>
                                 </tr>
                         </tbody>
                     </table>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-12 col-md-12 mb-12">
+        <div class="col-xl-12 col-md-12 mb-12 pt-2">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="form-group row">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="status" class="col-form-label font-weight-bold">{{ __('Status') }}</label>
-                            <p class="form-control-plaintext">{{ $harvestIssue->status }}</p>
+                            <p class="form-control-plaintext">{{ __($harvestIssue->status) }}</p>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="picture" class="col-form-label font-weight-bold">{{ __('Picture') }}</label>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('harvest_logs.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
+                    <a href="{{ route('harvest_logs.issues',[$harvestIssue->harvestLog->id]) }}" class="btn btn-secondary">{{ __('Back') }}</a>
                 </div>
             </div>
         </div>

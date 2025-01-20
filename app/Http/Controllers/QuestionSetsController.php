@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\QuestionSet;
+use App\Models\QuestionGroup;
+use App\Models\QuestionSetDetail;
 
 class QuestionSetsController extends Controller
 {
@@ -88,4 +90,75 @@ class QuestionSetsController extends Controller
     {
         //
     }
+
+    public function addQuestionGroup($id)
+    {
+        $questionSet = QuestionSet::find($id);
+        $questionGroupList = QuestionGroup::where('status', 'active')->pluck('name', 'id');
+        return view('question_sets.add_question_group', compact('id', 'questionSet', 'questionGroupList'));
+    }
+
+    public function storeQuestionGroup(Request $request, $id)
+    {
+        $tmp = $request->all();
+        $tmp['question_set_id'] = $id;
+        $lastSequence = QuestionSetDetail::where('question_set_id', $id)->max('sequence') ?? 0;
+        $tmp['sequence'] = $lastSequence + 1;
+        $tmp['status'] = 'active';
+
+        $questionSet = QuestionSet::find($id);
+        $questionSet->questionSetDetails()->create($tmp);
+
+        (new QuestionSetDetail())->regenratesequences($id);
+
+
+        return redirect()->route('question_sets.show', $id)->with('success', 'Question Group created successfully.');
+    }
+
+    public function moveupQuestionGroup($id)
+    {
+        $questionSetDetail = QuestionSetDetail::find($id);
+        $currentSequence = $questionSetDetail->sequence;
+        $previousDetail = QuestionSetDetail::where('question_set_id', $questionSetDetail->question_set_id)
+            ->where('sequence', '<', $currentSequence)
+            ->orderBy('sequence', 'desc')
+            ->first();
+
+        if ($previousDetail) {
+            $questionSetDetail->sequence = $previousDetail->sequence;
+            $previousDetail->sequence = $currentSequence;
+
+            $questionSetDetail->save();
+            $previousDetail->save();
+        }
+        return redirect()->route('question_sets.show', $questionSetDetail->question_set_id)->with('success', 'Question Group moved up successfully.');
+    }
+
+    public function movedownQuestionGroup($id)
+    {
+        $questionSetDetail = QuestionSetDetail::find($id);
+        $currentSequence = $questionSetDetail->sequence;
+        $nextDetail = QuestionSetDetail::where('question_set_id', $questionSetDetail->question_set_id)
+            ->where('sequence', '>', $questionSetDetail->sequence)
+            ->orderBy('sequence', 'asc')
+            ->first();
+
+        if ($nextDetail) {
+            $questionSetDetail->sequence = $nextDetail->sequence;
+            $nextDetail->sequence = $currentSequence;
+
+            $questionSetDetail->save();
+            $nextDetail->save();
+        }
+        return redirect()->route('question_sets.show', $questionSetDetail->question_set_id)->with('success', 'Question Group moved down successfully.');
+    }
+
+    public function removeQuestionGroup($id)
+    {
+        $questionSetDetail = QuestionSetDetail::find($id);
+        $questionSetId = $questionSetDetail->question_set_id;
+        $questionSetDetail->delete();
+        return redirect()->route('question_sets.show', $questionSetId)->with('success', 'Question Group removed successfully.');
+    }
+
 }

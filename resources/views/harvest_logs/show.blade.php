@@ -64,15 +64,15 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="weather" class="col-form-label font-weight-bold">{{ __('Weather') }}</label>
-                            <p>{{ $harvestLog->weather }}</p>
+                            <p>{{ __($harvestLog->weather) }}</p>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="progress_status" class="col-form-label font-weight-bold">{{ __('Progress') }}</label>
-                            <p>{{ $harvestLog->progress_status }}</p>
+                            <p>{{ __($harvestLog->progress_status) }}</p>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="status" class="col-form-label font-weight-bold">{{ __('Status') }}</label>
-                            <p>{{ $harvestLog->status }}</p>
+                            <p>{{ __($harvestLog->status) }}</p>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <label for="picture" class="col-form-label font-weight-bold">{{ __('Picture') }}</label>

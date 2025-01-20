@@ -2,7 +2,7 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ __('Create') }} {{ __('Harvester Plan') }} / {{ $cropList[$activeCrops->crop_id] }}</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ __('Create') }}  {{ __('Harvester Issues') }} / {{ $cropList[$activeCrops->crop_id] }}</h1>
     </div>
 
     <!-- Content Row -->
@@ -15,10 +15,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Harvester / Driver</th>
-                                <th scope="col">Farmer / Land Size</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">{{__('Date')}}</th>
+                                <th scope="col">{{__('Harvester')}} / {{__('Driver')}}</th>
+                                <th scope="col">{{__('Farmer')}} / {{__('Land Size')}}</th>
+                                <th scope="col">{{__('Status')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                     <td>{{ $harvestLog->harvest_date }}</td>
                                     <td>{{ $harvestLog->harvester->name }} / {{ $harvestLog->driver->name }}</td>
                                     <td>{{ $harvestLog->farmer_name }} / {{ $harvestLog->area_size }}</td>
-                                    <td>{{ $harvestLog->progress_status }} / {{ $harvestLog->status }}</td>
+                                    <td>{{ __($harvestLog->progress_status) }} / {{ __($harvestLog->status) }}</td>
                                 </tr>
                         </tbody>
                     </table>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-12 col-md-12 mb-12">
+        <div class="col-xl-12 col-md-12 mb-12 pt-2">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <form action="{{ route('harvest_logs.storeissue',$harvestLog->id) }}" method="POST" enctype="multipart/form-data">
@@ -91,7 +91,7 @@
 
                         </div>
 
-                        <a href="{{ route('harvest_logs.index') }}" class="btn btn-secondary">{{ __('Back') }}</a> <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{__('Submit')}}</button> <a href="{{ route('harvest_logs.issues',[$harvestLog->id]) }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

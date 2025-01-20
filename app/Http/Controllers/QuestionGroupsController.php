@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\QuestionGroup;
 use App\Models\QuestionGroupDetail;
 use App\Models\Question;
+use App\Models\QuestionSetDetail;
 
 class QuestionGroupsController extends Controller
 {
@@ -87,7 +88,13 @@ class QuestionGroupsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chk = QuestionSetDetail::where('question_group_id', $id)->count();
+        if ($chk > 0) {
+            return redirect()->route('question_groups.index')->with('error', 'Question Group cannot be deleted as it is being used in Question Set.');
+        }
+
+        QuestionGroup::find($id)->delete();
+        return redirect()->route('question_groups.index')->with('success', 'Question Group deleted successfully.');
     }
 
     public function addQuestion($id)
@@ -107,20 +114,47 @@ class QuestionGroupsController extends Controller
 
         $questionGroup = QuestionGroup::find($id);
         $questionGroup->questionGroupDetails()->create($tmp);
+
+        (new QuestionGroupDetail())->regenratesequences($id);
+
         return redirect()->route('question_groups.show', $id)->with('success', 'Question added successfully.');
     }
 
     public function moveupQuestion($id)
     {
         $questionSetDetail = QuestionGroupDetail::find($id);
-        $questionSetDetail->moveOrderUp();
+        $currentSequence = $questionSetDetail->sequence;
+        $previousQuestionSetDetail = QuestionGroupDetail::where('question_group_id', $questionSetDetail->question_group_id)
+            ->where('sequence', '<', $currentSequence)
+            ->orderBy('sequence', 'desc')
+            ->first();
+
+        if ($previousQuestionSetDetail) {
+            $questionSetDetail->sequence = $previousQuestionSetDetail->sequence;
+            $previousQuestionSetDetail->sequence = $currentSequence;
+
+            $questionSetDetail->save();
+            $previousQuestionSetDetail->save();
+        }
         return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question moved up successfully.');
     }
 
     public function movedownQuestion($id)
     {
         $questionSetDetail = QuestionGroupDetail::find($id);
-        $questionSetDetail->moveOrderDown();
+        $currentSequence = $questionSetDetail->sequence;
+        $nextQuestionSetDetail = QuestionGroupDetail::where('question_group_id', $questionSetDetail->question_group_id)
+            ->where('sequence', '>', $currentSequence)
+            ->orderBy('sequence', 'asc')
+            ->first();
+
+        if ($nextQuestionSetDetail) {
+            $questionSetDetail->sequence = $nextQuestionSetDetail->sequence;
+            $nextQuestionSetDetail->sequence = $currentSequence;
+
+            $questionSetDetail->save();
+            $nextQuestionSetDetail->save();
+        }
         return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question moved down successfully.');
     }
 
@@ -130,6 +164,5 @@ class QuestionGroupsController extends Controller
         $questionSetDetail->delete();
         return redirect()->route('question_groups.show', $questionSetDetail->question_group_id)->with('success', 'Question removed successfully.');
     }
-
 
 }

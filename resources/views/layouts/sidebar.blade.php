@@ -5,7 +5,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-snowplow"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">AT Form</div>
+                <div class="sidebar-brand-text mx-3">{{ __('AT Form') }}</div>
             </a>
 
             <!-- Divider -->
@@ -15,7 +15,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>{{__('Dashboard')}}</span></a>
             </li>
 
             <!-- Divider -->
@@ -23,7 +23,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                AT Form
+                {{ __('AT Form') }}
             </div>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -31,13 +31,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fa fa-fw fa-wrench"></i>
-                    <span>Activities</span>
+                    <span>{{ __('Activities') }}</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Activities</h6>
-                        <a class="collapse-item" href="{{ route('harvest_logs.index') }}">Harvest Plan</a>
+                        <h6 class="collapse-header">{{ __('Activities') }}</h6>
+                        <a class="collapse-item" href="{{ route('harvest_logs.index') }}">{{ __('Harvest Plan') }}</a>
+                        <a class="collapse-item" href="{{ route('maintains.index') }}">{{ __('Harvester Maintain') }}</a>
                     </div>
                 </div>
             </li>
@@ -47,18 +48,21 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Admin</span>
+                    <span>{{ __('Admin') }}</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Admin Management:</h6>
-                        <a class="collapse-item" href="{{ route('question_sets.index') }}">Question Set</a>
-                        <a class="collapse-item" href="{{ route('question_groups.index') }}">Question Group</a>
-                        <a class="collapse-item" href="{{ route('questions.index') }}">Questions</a>
-                        <a class="collapse-item" href="{{ route('crops.index') }}">Crop</a>
-                        <a class="collapse-item" href="{{ route('harvesters.index') }}">Harvesters</a>
-                        <a class="collapse-item" href="{{ route('drivers.index') }}">Drivers</a>
-
+                        <h6 class="collapse-header">{{ __('Admin Management') }}:</h6>
+                        <a class="collapse-item" href="{{ route('crops.index') }}">
+                            {{ __('Crop Management') }}
+                        </a>
+                        <a class="collapse-item" href="{{ route('harvesters.index') }}">{{ __('Harvester Management') }}</a>
+                        <a class="collapse-item" href="{{ route('drivers.index') }}">{{ __('Driver Management') }}</a>
+                        <a class="collapse-item" href="{{ route('mechanics.index') }}">{{ __('Mechanic Management') }}</a>
+                        <h6 class="collapse-header">{{ __('Question Management') }}:</h6>
+                        <a class="collapse-item" href="{{ route('question_sets.index') }}">{{ __('Question Set Management') }}</a>
+                        <a class="collapse-item" href="{{ route('question_groups.index') }}">{{ __('Question Group Management') }}</a>
+                        <a class="collapse-item" href="{{ route('questions.index') }}">{{ __('Question Management') }}</a>
                     </div>
                 </div>
             </li>

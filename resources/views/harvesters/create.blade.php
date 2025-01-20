@@ -2,7 +2,7 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Harvester Create</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ __('Harvester') }} {{ __('Create') }}</h1>
     </div>
 
     <!-- Content Row -->
@@ -19,7 +19,7 @@
                             @error('name')
                                 has-error
                             @enderror">
-                            <label for="name">Name</label>
+                            <label for="name">{{ __('Name') }}</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                             @error('name')
                                 <span class="help-block
@@ -33,7 +33,7 @@
                             @error('description')
                                 has-error
                             @enderror">
-                            <label for="description">Description</label>
+                            <label for="description">{{ __('Description') }}</label>
                             <textarea class="form-control" id="description" name="description"
                                 rows="3">{{ old('description') }}</textarea>
                             @error('description')
@@ -48,7 +48,7 @@
                             @error('start_date')
                                 has-error
                             @enderror">
-                            <label for="start_date">Start Date</label>
+                            <label for="start_date">{{ __('Start Date') }}</label>
                             <input type="date" class="form-control" id="start_date" name="start_date"
                                 value="{{ old('start_date') }}">
                             @error('start_date')
@@ -63,10 +63,10 @@
                             @error('status')
                                 has-error
                             @enderror">
-                            <label for="status">Status</label>
+                            <label for="status">{{ __('Status') }}</label>
                             <select class="form-control" id="status" name="status">
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                             </select>
                             @error('status')
                                 <span class="help-block
@@ -76,7 +76,8 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                        <a href="{{ route('harvesters.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

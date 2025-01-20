@@ -2,9 +2,7 @@
 @section('content')
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Crops</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">{{ __('Crop Management') }}</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -17,11 +15,10 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Active</th>
-                                                <th scope="col">Actions</th>
+                                                <th scope="col">{{ __('ID') }}</th>
+                                                <th scope="col">{{ __('Name') }}</th>
+                                                <th scope="col">{{ __('Description') }}</th>
+                                                <th scope="col">{{ __('Status') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -34,14 +31,11 @@
                                                         <a href="{{ route('crops.activate', $crop->id) }}"
                                                             class="btn btn-primary">
                                                         @if ($activeCrop->crop_id == $crop->id)
-                                                        {{ $activeCrop->status }}
+                                                        {{ __('Active') }}
                                                     @else
-                                                        inactive
+                                                        {{ __('Inactive') }}
                                                     @endif
                                                     </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('crops.show', $crop->id) }}" class="btn btn-primary">View</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -25,4 +25,15 @@ class QuestionGroupDetail extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function regenratesequences($question_group_id)
+    {
+        $questionGroupDetails = QuestionGroupDetail::where('question_group_id', $question_group_id)->orderBy('sequence')->get();
+        $sequence = 1;
+        foreach ($questionGroupDetails as $questionGroupDetail) {
+            $questionGroupDetail->sequence = $sequence;
+            $questionGroupDetail->save();
+            $sequence++;
+        }
+    }
 }

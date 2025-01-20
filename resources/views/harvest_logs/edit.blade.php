@@ -135,8 +135,8 @@
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <label for="weather" class="col-form-label font-weight-bold">{{ __('Weather') }}</label>
                                     <select class="form-control" id="weather" name="weather">
-                                        <option value="sunny" {{ old('weather', $harvestLog->weather) == 'sunny' ? 'selected' : '' }}>Sunny</option>
-                                        <option value="rainy" {{ old('weather', $harvestLog->weather) == 'rainy' ? 'selected' : '' }}>Rainy</option>
+                                        <option value="sunny" {{ old('weather', $harvestLog->weather) == 'sunny' ? 'selected' : '' }}>{{ __('Sunny') }}</option>
+                                        <option value="rainy" {{ old('weather', $harvestLog->weather) == 'rainy' ? 'selected' : '' }}>{{ __('Rainy') }}</option>
                                     </select>
                                     @error('weather')
                                         <span class="help-block has-error">{{ $message }}</span>
@@ -145,12 +145,12 @@
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <label for="progress_status" class="col-form-label font-weight-bold">{{ __('Progress') }}</label>
                                 <select class="form-control" id="progress_status" name="progress_status">
-                                    <option value="Planning" {{ old('progress_status', $harvestLog->progress_status) == 'Planning' ? 'selected' : '' }}>Planning</option>
-                                    <option value="Ready" {{ old('progress_status', $harvestLog->progress_status) == 'Ready' ? 'selected' : '' }}>Ready</option>
-                                    <option value="On-Progress" {{ old('progress_status', $harvestLog->progress_status) == 'On-Progress' ? 'selected' : '' }}>On-Progress</option>
-                                    <option value="Hold" {{ old('progress_status', $harvestLog->progress_status) == 'Hold' ? 'selected' : '' }}>Hold</option>
-                                    <option value="Ignore" {{ old('progress_status', $harvestLog->progress_status) == 'Ignore' ? 'selected' : '' }}>Ignore</option>
-                                    <option value="Finish" {{ old('progress_status', $harvestLog->progress_status) == 'Finish' ? 'selected' : '' }}>Finish</option>
+                                    <option value="Planning" {{ old('progress_status', $harvestLog->progress_status) == 'Planning' ? 'selected' : '' }}>{{ __('Planning') }}</option>
+                                    <option value="Ready" {{ old('progress_status', $harvestLog->progress_status) == 'Ready' ? 'selected' : '' }}>{{ __('Ready') }}</option>
+                                    <option value="On-Progress" {{ old('progress_status', $harvestLog->progress_status) == 'On-Progress' ? 'selected' : '' }}>{{ __('On-Progress') }}</option>
+                                    <option value="Hold" {{ old('progress_status', $harvestLog->progress_status) == 'Hold' ? 'selected' : '' }}>{{ __('Hold') }}</option>
+                                    <option value="Ignore" {{ old('progress_status', $harvestLog->progress_status) == 'Ignore' ? 'selected' : '' }}>{{ __('Ignore') }}</option>
+                                    <option value="Finish" {{ old('progress_status', $harvestLog->progress_status) == 'Finish' ? 'selected' : '' }}>{{ __('Finish') }}</option>
                                 </select>
                                 @error('progress_status')
                                     <span class="help-block has-error">{{ $message }}</span>
@@ -159,15 +159,15 @@
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <label for="status" class="col-form-label font-weight-bold">{{ __('Status') }}</label>
                                 <select class="form-control" id="status" name="status">
-                                    <option value="active" {{ old('status', $harvestLog->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ old('status', $harvestLog->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="active" {{ old('status', $harvestLog->status) == 'active' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                    <option value="inactive" {{ old('status', $harvestLog->status) == 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                                 </select>
                                 @error('status')
                                     <span class="help-block has-error">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-4">
-                                <label for="picture" class="col-form-label font-weight-bold">{{ __('Picture') }}</label>
+                                <label for="picture" class="col-form-label font-weight-bold">{{ __('Upload Picture') }}</label>
                                 <input type="file" class="form-control" id="picture" name="picture">
                                 @error('picture')
                                     <span class="help-block has-error">{{ $message }}</span>
@@ -188,8 +188,10 @@
 
                         </div>
 
-                        <a href="{{ route('harvest_logs.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
+
                         <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+
+                        <a href="{{ route('harvest_logs.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

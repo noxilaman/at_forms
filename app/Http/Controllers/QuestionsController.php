@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\QuestionGroupDetail;
 
 class QuestionsController extends Controller
 {
@@ -85,6 +86,11 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chk = QuestionGroupDetail::where('question_id', $id)->count();
+        if ($chk > 0) {
+            return redirect()->route('questions.index')->with('error', 'Question cannot be deleted as it is associated with a question group.');
+        }
+        Question::find($id)->delete();
+        return redirect()->route('questions.index')->with('success', 'Question deleted successfully.');
     }
 }

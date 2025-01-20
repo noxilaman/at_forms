@@ -2,7 +2,7 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Question Create</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ __('Question Create') }}</h1>
     </div>
 
     <!-- Content Row -->
@@ -19,7 +19,7 @@
                             @error('question')
                                 has-error
                             @enderror">
-                            <label for="question">Question</label>
+                            <label for="question">{{ __('Question') }}</label>
                             <input type="text" class="form-control" id="question" name="question" value="{{ old('question') }}">
                             @error('question')
                                 <span class="help-block
@@ -34,7 +34,7 @@
                             @error('description')
                                 has-error
                             @enderror">
-                            <label for="description">Description</label>
+                            <label for="description">{{ __('Description') }}</label>
                             <textarea class="form-control" id="description" name="description"
                                 rows="3">{{ old('description') }}</textarea>
                             @error('description')
@@ -49,10 +49,10 @@
                             @error('status')
                                 has-error
                             @enderror">
-                            <label for="status">Status</label>
+                            <label for="status">{{ __('Status') }}</label>
                             <select class="form-control" id="status" name="status">
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                             </select>
                             @error('status')
                                 <span class="help-block
@@ -62,7 +62,8 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                        <a href="{{ route('questions.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

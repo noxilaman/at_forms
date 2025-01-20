@@ -2,7 +2,7 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Driver Edit #{{ $driver->id }}</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ __('Driver Edit #:id', ['id' => $driver->id]) }}</h1>
     </div>
 
     <!-- Content Row -->
@@ -19,7 +19,7 @@
                             @error('name')
                                 has-error
                             @enderror">
-                            <label for="name">Name</label>
+                            <label for="name">{{ __('Name') }}</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $driver->name) }}">
                             @error('name')
                                 <span class="help-block
@@ -33,7 +33,7 @@
                             @error('nickname')
                                 has-error
                             @enderror">
-                            <label for="nickname">Nickname</label>
+                            <label for="nickname">{{ __('Nickname') }}</label>
                             <input type="text" class="form-control" id="nickname" name="nickname" value="{{ old('nickname', $driver->nickname) }}">
                             @error('nickname')
                                 <span class="help-block
@@ -47,7 +47,7 @@
                             @error('description')
                                 has-error
                             @enderror">
-                            <label for="description">Description</label>
+                            <label for="description">{{ __('Description') }}</label>
                             <textarea class="form-control" id="description" name="description"
                                 rows="3">{{ old('description', $driver->description) }}</textarea>
                             @error('description')
@@ -62,10 +62,10 @@
                             @error('status')
                                 has-error
                             @enderror">
-                            <label for="status">Status</label>
+                            <label for="status">{{ __('Status') }}</label>
                             <select class="form-control" id="status" name="status">
-                                <option value="active" {{ old('status', $driver->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ old('status', $driver->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                <option value="active" {{ old('status', $driver->status) == 'active' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                <option value="inactive" {{ old('status', $driver->status) == 'inactive' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
                             </select>
                             @error('status')
                                 <span class="help-block
@@ -74,9 +74,8 @@
                                     @enderror">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                        <a href="{{ route('drivers.index') }}" class="btn btn-secondary">{{ __('Back') }}</a></form>
                 </div>
             </div>
         </div>
